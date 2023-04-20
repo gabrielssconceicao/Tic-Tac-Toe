@@ -1,0 +1,9 @@
+.board {
+  height: fit-content;
+  width: fit-content;
+}
+
+.squares {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -2,7 +2,6 @@
 
 ## Template
 
-<img scr="">
 Template used -> <code>npm create vite@latest . --template react</code>
 
 

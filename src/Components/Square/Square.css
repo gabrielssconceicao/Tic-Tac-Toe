@@ -1,0 +1,17 @@
+.square {
+  min-width: 100px;
+  width: 250px;
+  max-width: 300px;
+
+  min-height: 100px;
+  height: 250px;
+  max-height: 300px;
+
+  border: 1px solid #000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 70px;
+}
