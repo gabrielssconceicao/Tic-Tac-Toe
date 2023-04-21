@@ -65,6 +65,7 @@ export function Board() {
 
   return (
     <div className="board">
+      <h1>Jogo da Velha</h1>
       <div className="squares">
         {squares.map((el, index) => (
           <Square key={index} onClick={() => handleClick(index)} value={el} />

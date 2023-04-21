@@ -1,9 +1,40 @@
 .board {
   height: fit-content;
   width: fit-content;
+  margin: 0 auto;
 }
 
 .squares {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  height: fit-content;
+  margin-bottom: 30px;
+}
+
+.score {
+  padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  font-size: 25px;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.score button {
+  width: 40%;
+  height: 40px;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  background-color: #071330;
+  color: #c0c0c0;
+  border: 1px solid #c0c0c0;
 }
