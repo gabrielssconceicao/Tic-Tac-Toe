@@ -46,3 +46,19 @@ h1 {
   color: #c0c0c0;
   border: 1px solid #c0c0c0;
 }
+
+@media (max-width:400px) {
+  .board {
+    margin: 0;
+  }
+  h1 {
+    font-size: 25px;
+  }
+
+  .socre {
+    width: fit-content;
+  }
+  .score h3 {
+    font-size: 15px;
+  }
+}
