@@ -33,6 +33,7 @@ h1 {
   background-color: black;
   border-radius: 20px;
   width: 100%;
+  max-width: 700px;
 }
 
 .score button {
@@ -50,7 +51,6 @@ h1 {
 }
 
 @media (max-width:450px) {
-
 
   h1 {
     font-size: 25px;
