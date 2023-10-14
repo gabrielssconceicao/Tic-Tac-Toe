@@ -13,3 +13,10 @@ main {
   justify-content: space-around;
   gap: 20px;
 }
+
+.player {
+  color:  #4cc3d9;
+}
+.opponent {
+  color: #ffe34e;
+}

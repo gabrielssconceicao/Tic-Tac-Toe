@@ -17,5 +17,15 @@
 }
 
 .square:hover {
-  box-shadow: inset -8px 8px 2px  #1f1f1f;;
+  box-shadow: inset -8px 8px 2px  #1f1f1f;
 }
+
+.square span {
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.square:hover span {
+  font-size: 50px;
+}
+
