@@ -45,66 +45,76 @@ export default function App() {
       }
       setTurn(Math.floor(Math.random() * 2));
       return;
-    }
+    },
+    []
   );
 
-  const checkWinner = useCallback((squares) => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (
-        squares[a].value &&
-        squares[a].value === squares[b].value &&
-        squares[a].value === squares[c].value
-      ) {
+  const checkWinner = useCallback(
+    (squares) => {
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (
+          squares[a].value &&
+          squares[a].value === squares[b].value &&
+          squares[a].value === squares[c].value
+        ) {
+          const updatedScore = {
+            ...score,
+            [squares[a].playerTurn]: score[squares[a].playerTurn] + 1,
+          };
+          setScore(updatedScore);
+          resetGame(updatedScore, false, true, squares[a].playerTurn);
+          return;
+        }
+      }
+      if (squares.every((square) => square.value !== '')) {
         const updatedScore = {
           ...score,
-          [squares[a].playerTurn]: score[squares[a].playerTurn] + 1,
+          draw: score.draw + 1,
         };
         setScore(updatedScore);
-        resetGame(updatedScore, false, true, squares[a].playerTurn);
+        resetGame(updatedScore, false);
         return;
       }
-    }
-    if (squares.every((square) => square.value !== '')) {
-      const updatedScore = {
-        ...score,
-        draw: score.draw + 1,
-      };
-      setScore(updatedScore);
-      resetGame(updatedScore, false);
-      return;
-    }
-  });
+    },
+    [score, resetGame]
+  );
 
-  const squareClick = useCallback((index) => {
-    const newSquares = squares.map((square, i) => {
-      if (i === index && square.value === '') {
-        return {
-          ...square,
-          value: turn === 0 ? 'X' : 'O',
-          playerTurn: turn === 0 ? 'player' : 'opponent',
-        };
-      }
-      return square;
-    });
-    setSquares(newSquares);
-    setTurn(turn === 0 ? 1 : 0);
-    checkWinner(newSquares);
-  });
+  const squareClick = useCallback(
+    (index) => {
+      const newSquares = squares.map((square, i) => {
+        if (i === index && square.value === '') {
+          return {
+            ...square,
+            value: turn === 0 ? 'X' : 'O',
+            playerTurn: turn === 0 ? 'player' : 'opponent',
+          };
+        }
+        return square;
+      });
+      setSquares(newSquares);
+      setTurn(turn === 0 ? 1 : 0);
+      checkWinner(newSquares);
+    },
+    [squares, turn, checkWinner]
+  );
 
   return (
     <>
-      <Display turn={turn} resetFunc={() => resetGame(score, true)} />
+      <Display
+        turn={turn == 0 ? 'player' : 'opponent'}
+        resetFunc={() => resetGame(score, true)}
+      />
       <Board>
         {squares.map((square, i) => (
           <Square key={i} handleClick={() => squareClick(i)}>

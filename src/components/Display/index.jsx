@@ -5,10 +5,8 @@ export const Display = ({ turn, resetFunc }) => {
   return (
     <section className="display">
       <div className="turn">
-        Turn:{' '}
-        <span className={turn == 0 ? 'player' : 'opponent'}>
-          {turn == 0 ? 'X' : 'O'}
-        </span>
+        Turn:
+        <span className={turn}>{turn == 'player' ? 'X' : 'O'}</span>
       </div>
 
       <button className="reset-btn" onClick={resetFunc}>
