@@ -10,11 +10,11 @@
 }
 
 .display .turn {
-  font-size: 15px;
+  font-size: 25px;
 
 }
 .display .turn span {
-  font-size: 20px;
+  font-size: 35px;
   font-weight: bold;
 }
 

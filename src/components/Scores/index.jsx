@@ -1,6 +1,7 @@
+import P from 'prop-types';
 import { Score } from './Score';
 import './style.css';
-export const Scores = () => {
+export const Scores = ({ score }) => {
   const scoresBgs = {
     win: {
       background: '#4e7d5d',
@@ -20,16 +21,22 @@ export const Scores = () => {
   };
   return (
     <section className="scores">
-      <Score points={0} {...scoresBgs.win}>
+      <Score points={score.player} {...scoresBgs.win}>
         Win(X)
       </Score>
-      <Score points={0} {...scoresBgs.draw}>
+      <Score points={score.draw} {...scoresBgs.draw}>
         Draw
       </Score>
-      <Score points={0} {...scoresBgs.lose}>
+      <Score points={score.opponent} {...scoresBgs.lose}>
         Lose(O)
       </Score>
     </section>
   );
 };
-Scores.propTypes = {};
+Scores.propTypes = {
+  score: P.shape({
+    player: P.number.isRequired,
+    opponent: P.number.isRequired,
+    draw: P.number.isRequired,
+  }).isRequired,
+};
