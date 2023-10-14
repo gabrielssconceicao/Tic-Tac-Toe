@@ -1,10 +1,3 @@
-import './App.css';
-import { Board } from './Components/Board';
-
 export default function App() {
-  return (
-    <div className="App">
-      <Board />
-    </div>
-  );
+  return <h1>Tic-Tac-Toe</h1>;
 }
