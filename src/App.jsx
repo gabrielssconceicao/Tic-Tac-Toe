@@ -17,18 +17,36 @@ export default function App() {
   );
   const [turn, setTurn] = useState(Math.floor(Math.random() * 2));
 
-  const resetGame = useCallback((newScore, hasWinner = false, winner = '') => {
-    setSquares(new Array(9).fill({ value: '', playerTurn: '' }));
-    localStorage.setItem('score', JSON.stringify(newScore));
-    if (hasWinner) {
-      const nextTurn = winner === 'player' ? 0 : 1;
+  const resetGame = useCallback(
+    (newScore, resetScore = false, hasWinner = false, winner = '') => {
+      setSquares(new Array(9).fill({ value: '', playerTurn: '' }));
+      if (resetScore) {
+        setScore({
+          player: 0,
+          opponent: 0,
+          draw: 0,
+        });
+        localStorage.setItem(
+          'score',
+          JSON.stringify({
+            player: 0,
+            opponent: 0,
+            draw: 0,
+          })
+        );
+        return;
+      }
+      localStorage.setItem('score', JSON.stringify(newScore));
+      if (hasWinner && !resetScore) {
+        const nextTurn = winner === 'player' ? 0 : 1;
 
-      setTurn(nextTurn);
+        setTurn(nextTurn);
+        return;
+      }
+      setTurn(Math.floor(Math.random() * 2));
       return;
     }
-    setTurn(Math.floor(Math.random() * 2));
-    return;
-  });
+  );
 
   const checkWinner = useCallback((squares) => {
     const lines = [
@@ -53,7 +71,7 @@ export default function App() {
           [squares[a].playerTurn]: score[squares[a].playerTurn] + 1,
         };
         setScore(updatedScore);
-        resetGame(updatedScore, true, squares[a].playerTurn);
+        resetGame(updatedScore, false, true, squares[a].playerTurn);
         return;
       }
     }
@@ -63,7 +81,7 @@ export default function App() {
         draw: score.draw + 1,
       };
       setScore(updatedScore);
-      resetGame(updatedScore);
+      resetGame(updatedScore, false);
       return;
     }
   });
@@ -86,7 +104,7 @@ export default function App() {
 
   return (
     <>
-      <Display turn={turn} resetFunc={resetGame} />
+      <Display turn={turn} resetFunc={() => resetGame(score, true)} />
       <Board>
         {squares.map((square, i) => (
           <Square key={i} handleClick={() => squareClick(i)}>
