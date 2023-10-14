@@ -1,0 +1,16 @@
+.score {
+  text-align: center;
+  width: 150px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: #fff;
+}
+
+.score h1 {
+  font-size: 30px;
+}
+.score h2 {
+  font-size: 22px
+}
