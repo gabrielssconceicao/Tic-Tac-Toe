@@ -8,19 +8,21 @@ export default function App() {
   const [squares, setSquares] = useState(
     new Array(9).fill({ value: '', playerTurn: '' })
   );
-  const [score, setScore] = useState({
-    player: 0,
-    opponent: 0,
-    draw: 0,
-  });
+  const [score, setScore] = useState(
+    JSON.parse(localStorage.getItem('score')) || {
+      player: 0,
+      opponent: 0,
+      draw: 0,
+    }
+  );
   const [turn, setTurn] = useState(Math.floor(Math.random() * 2));
 
-  const resetGame = useCallback((hasWinner = false, winner = '') => {
+  const resetGame = useCallback((newScore, hasWinner = false, winner = '') => {
     setSquares(new Array(9).fill({ value: '', playerTurn: '' }));
+    localStorage.setItem('score', JSON.stringify(newScore));
     if (hasWinner) {
-      console.log(winner);
       const nextTurn = winner === 'player' ? 0 : 1;
-      console.log(nextTurn);
+
       setTurn(nextTurn);
       return;
     }
@@ -46,17 +48,22 @@ export default function App() {
         squares[a].value === squares[b].value &&
         squares[a].value === squares[c].value
       ) {
-        setScore({
+        const updatedScore = {
           ...score,
           [squares[a].playerTurn]: score[squares[a].playerTurn] + 1,
-        });
-        resetGame(true, squares[a].playerTurn);
+        };
+        setScore(updatedScore);
+        resetGame(updatedScore, true, squares[a].playerTurn);
         return;
       }
     }
     if (squares.every((square) => square.value !== '')) {
-      setScore({ ...score, draw: score.draw + 1 });
-      resetGame();
+      const updatedScore = {
+        ...score,
+        draw: score.draw + 1,
+      };
+      setScore(updatedScore);
+      resetGame(updatedScore);
       return;
     }
   });

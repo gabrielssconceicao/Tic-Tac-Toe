@@ -14,3 +14,9 @@
 .score h2 {
   font-size: 22px
 }
+
+@media (max-width: 530px) {
+  .score {
+    flex: 1;
+  }
+}

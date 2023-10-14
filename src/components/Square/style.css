@@ -29,3 +29,9 @@
   font-size: 50px;
 }
 
+@media (max-width: 530px) {
+  .square {
+    width: calc((100vw - 50px) / 3);
+    height: calc((350px - 40px) / 3);
+  }
+}

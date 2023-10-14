@@ -5,3 +5,10 @@
   height: 150px;
   padding: 10px;
 }
+
+@media (max-width: 530px) {
+  .scores {
+    width: 100%;
+    gap: 10px
+  }
+}
